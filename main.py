@@ -24,7 +24,7 @@ else:
 
 def send_message(client):
     while True:
-        message = input("Enter message: ")
+        message = input("")
         client.send(message.encode())
         print("You: " + message)
 
