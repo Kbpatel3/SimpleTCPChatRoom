@@ -17,3 +17,22 @@ elif connection_type == "2":
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect(("100.64.15.30", 2000))
     print("Connected to server.")
+else:
+    print("Invalid input.")
+    exit()
+
+
+def send_message(client):
+    while True:
+        message = input("Enter message: ")
+        client.send(message.encode())
+        print("You: " + message)
+
+
+def receive_message(client):
+    while True:
+        print("Client: " + client.recv(1024).decode())
+
+
+threading.Thread(target=send_message, args=(client_socket,)).start()
+threading.Thread(target=receive_message, args=(client_socket,)).start()
